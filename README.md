@@ -36,7 +36,7 @@ information from nginx logfiles.
 
 ###FAQ 
 
-####How did you set up Elastic search? 
+####How do you set up Logstash / Elastic Search 
 
 I followed guides published by digital occean
 
@@ -46,5 +46,12 @@ https://www.digitalocean.com/community/tutorials/adding-logstash-filters-to-impr
 
 The file *build/provision-logstash.sh* contains a script which automates the steps in the first article
 
+####How do you ship logs to logstash
 
+The article: 
+
+https://www.digitalocean.com/community/tutorials/how-to-use-logstash-and-kibana-to-centralize-and-visualize-logs-on-ubuntu-14-04
+
+Shows hos to use the logstash log forwarder and the script in *build/provision-web.sh* 
+shows how the log forwarder is installed and configured. 
 
