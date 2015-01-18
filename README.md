@@ -55,3 +55,8 @@ The article:
 Shows how to use the Logstash log forwarder and the script in *build/provision-web.sh* 
 shows how the log forwarder is installed and configured. 
 
+####How do I search logs via Kibana 
+
+Go to the http://logs.logstashdemo.com after following the instructions above. 
+
+[The documentation](http://www.elasticsearch.org/guide/en/kibana/current/working-with-queries-and-filters.html) provides a set of examples on how to use the search effectivley.   
