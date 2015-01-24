@@ -52,13 +52,13 @@ You should see only the nginx access logs rather than all logs including syslogs
 
 http://web.logstashdemo.com/
 
-/ - A simple endpoint producing a sucesfull response and a single entry in the access log
+**/** - A simple endpoint producing a sucesfull response and a single entry in the access log
 
-/flappy - An endpoint that produces a range of errors to demonstrate using logstash to display errors
+**/flappy** - An endpoint that produces a range of errors to demonstrate using logstash to display errors
 
-/fingerscrossed - An endpoint which uses Monolog + Fingers Crossed handler to demo application logging
+**/fingerscrossed** - An endpoint which uses Monolog + Fingers Crossed handler to demo application logging
 
-/register - An endpoint which uses Monolog and Symfony Event Manager to demonstrate business event logging
+**/register** - An endpoint which uses Monolog and Symfony Event Manager to demonstrate business event logging
 
 ###FAQ 
 
@@ -99,9 +99,13 @@ In a production setup I recommend you automate the deployment of Logstash and it
 This vagrant file uses a host only networking configuration. This should be created automatically but where it isn't:
 
 1) Open Virtual Box
+
 2) Open preferences
+
 3) Select networking
+
 4) Select 'Host Only Networks'
+
 5) Create a host only network wit the following settings: 
 ```
 IPV4 Address: 10.0.4.1
