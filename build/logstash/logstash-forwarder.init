@@ -17,15 +17,16 @@ PATH=/sbin:/usr/sbin:/bin:/usr/bin
 DESC="log shipper"
 NAME=logstash-forwarder
 DAEMON=/opt/logstash-forwarder/bin/logstash-forwarder
-DAEMON_ARGS="-config /etc/logstash-forwarder -spool-size 100 -log-to-syslog"
+DAEMON_ARGS="-config /etc/logstash-forwarder -spool-size 100"
 PIDFILE=/var/run/$NAME.pid
 SCRIPTNAME=/etc/init.d/$NAME
+LOG=/var/log/logstash-forwarder.log
 
 [ -r /etc/default/$NAME ] && . /etc/default/$NAME
 . /lib/init/vars.sh
 . /lib/lsb/init-functions
 
-COMMAND="cd /var/run; exec $DAEMON $DAEMON_ARGS"
+COMMAND="cd /var/run; exec $DAEMON $DAEMON_ARGS > $LOG"
 
 do_start() {
   # Skip if it's already running

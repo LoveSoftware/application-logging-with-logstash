@@ -42,7 +42,7 @@ cd /etc/pki/tls; sudo openssl req -x509 -batch -nodes -days 3650 -newkey rsa:204
 cp /etc/pki/tls/certs/logstash-forwarder.crt /vagrant/build/artifacts/logstash-forwarder.crt
 
 sudo cp /vagrant/build/logstash/01-lumberjack-input.conf /etc/logstash/conf.d/01-lumberjack-input.conf
-sudo cp /vagrant/build/logstash/10-syslog.conf /etc/logstash/conf.d/10-syslog.conf
+sudo cp /vagrant/build/logstash/10-filter.conf /etc/logstash/conf.d/10-filter.conf
 sudo cp /vagrant/build/logstash/30-lumberjack-output.conf /etc/logstash/conf.d/30-lumberjack-output.conf
 
 sudo service logstash restart

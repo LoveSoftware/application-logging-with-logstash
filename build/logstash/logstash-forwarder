@@ -11,6 +11,30 @@
         "/var/log/auth.log"
        ],
       "fields": { "type": "syslog" }
+    },
+    {
+      "paths": [
+        "/var/log/nginx/helloapp.access.log"
+       ],
+      "fields": { "type": "nginx-access" }
+    },
+    {
+      "paths": [
+        "/var/log/nginx/helloapp.error.log"
+       ],
+      "fields": { "type": "nginx-error" }
+    },
+    {
+      "paths": [
+        "/var/log/app.log"
+       ],
+      "fields": { "type": "helloapp-applog" }
+    },
+    {
+      "paths": [
+        "/var/log/bus.log"
+       ],
+      "fields": { "type": "helloapp-buslog" }
     }
    ]
 }
