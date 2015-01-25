@@ -9,10 +9,12 @@ Follow the instructions below to create teo VMs. The first of these is a fully w
 Logstash instance and the second a webserver hosting a simple PHP demo application.
 
 The web server sends its syslog, auth, Nginx and web application logs to the Logstash
-instance. The demo app has two endpoints, one which simply outputs a greeting and 
-another which fails in a variety of ways responding with a number of different http 
-response codes. The second endpoint is used to demonstrate how to get interesting 
-information from Nginx log files. 
+instance. The demo app has four endpoints all of which generate different types of log data
+and demonstate different techniques. 
+
+You can also look at the two provisioning files in *build/* for detailed instructions on how to install 
+Logstash, Elastic Search and Kibana on a central server and the log forwarder component on the other servers 
+in your infrastructure. 
 
 ##Set Up
 
@@ -30,7 +32,7 @@ information from Nginx log files.
 
 2. vagrant ssh web -c "cd /vagrant && composer install"
 
-3. Access Kibana from your web browser http://logs.logstashdemo.com
+3. Access Kibana from your web browser [http://logs.logstashdemo.com](http://logs.logstashdemo.com/index.html#/dashboard/file/logstash.json)
 
 4. Access the demo web application from your browser: http://web.logstashdemo.com
 
@@ -38,7 +40,7 @@ information from Nginx log files.
 
 When you visit the Kibana dashboard you should see a graph showing the various logs shipped from the web server 
 to the logs server. There should be a lot of syslog entries initially. By visiting the web instance you can trigger some
-Nginx access logs to be collected. 
+Nginx access logs to be collected (see below for examples). 
 
 Try the following query in the search box: 
 
@@ -46,7 +48,7 @@ Try the following query in the search box:
 type: nginx-access-hello-app AND response:200
 ```
 
-You should see only the nginx access logs rather than all logs including syslogs.
+You should see only the Nginx access logs rather than all logs including syslogs.
 
 ### List of web endpoints
 
@@ -59,6 +61,7 @@ http://web.logstashdemo.com/
 **/fingerscrossed** - An endpoint which uses Monolog + Fingers Crossed handler to demo application logging
 
 **/register** - An endpoint which uses Monolog and Symfony Event Manager to demonstrate business event logging
+ 
 
 ###FAQ 
 
@@ -121,5 +124,9 @@ tail -f /var/log/logstash-forwarder.log
 
 You should also be able to use the browser console to see if any errors are being returned from ajax calls to elastic search.
 
+
+####Vagrant refuses to 'up' the machines with a message about a missing plugin
+
+Have you installed the Host Updater plugin as indicated above? 
 
   
