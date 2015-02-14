@@ -31,6 +31,10 @@ sudo apt-get install -y apache2-utils
 echo "password" | sudo htpasswd -c -i /etc/nginx/conf.d/logs.logstashdemo.com.passwd kibana
 sudo service nginx restart
 
+# Hosts File
+echo '127.0.0.1 logs.logstashdemo.com' | sudo tee --append /etc/hosts
+echo '10.0.4.56 web.logstashdemo.com' | sudo tee --append /etc/hosts
+
 # Install logstash
 sudo apt-get install logstash=1.4.2-1-2c0f5a1
 
@@ -38,8 +42,8 @@ sudo apt-get install logstash=1.4.2-1-2c0f5a1
 sudo mkdir -p /etc/pki/tls/certs
 sudo mkdir /etc/pki/tls/private
 
-cd /etc/pki/tls; sudo openssl req -x509 -batch -nodes -days 3650 -newkey rsa:2048 -keyout private/logstash-forwarder.key -out certs/logstash-forwarder.crt
-cp /etc/pki/tls/certs/logstash-forwarder.crt /vagrant/build/artifacts/logstash-forwarder.crt
+sudo cp /vagrant/build/artifacts/logstash-forwarder.crt /etc/pki/tls/certs
+sudo cp /vagrant/build/artifacts/logstash-forwarder.key /etc/pki/tls/private
 
 sudo cp /vagrant/build/logstash/01-lumberjack-input.conf /etc/logstash/conf.d/01-lumberjack-input.conf
 sudo cp /vagrant/build/logstash/10-filter.conf /etc/logstash/conf.d/10-filter.conf

@@ -1,7 +1,4 @@
 #!/bin/sh
-wget -O - http://packages.elasticsearch.org/GPG-KEY-elasticsearch | sudo apt-key add -
-echo 'deb http://packages.elasticsearch.org/logstashforwarder/debian stable main' | sudo tee /etc/apt/sources.list.d/logstashforwarder.list
-
 sudo apt-get update
 
 # Install Required packages
@@ -10,6 +7,7 @@ sudo apt-get install -y git
 sudo apt-get install -y nginx
 sudo apt-get install -y php5-fpm php5 php5-dev 
 sudo apt-get install -y varnish
+sudo apt-get install -y supervisor
 
 # Configure Nginx
 sudo cp /vagrant/build/nginx/logdemo.conf /etc/nginx/sites-available/default
@@ -32,12 +30,15 @@ sudo chown www-data /var/log/app.log
 sudo chown www-data /var/log/bus.log
 sudo chmod 777 /var/log/logstash-forwarder.log
 
+# Hosts File
+echo '10.0.4.55 logs.logstashdemo.com' | sudo tee --append /etc/hosts
+echo '127.0.0.1 web.logstashdemo.com' | sudo tee --append /etc/hosts
+
 # Configure The Logstash Forwarder
-sudo cp /vagrant/build/logstash/logstash-forwarder.init /etc/init.d/logstash-forwarder
-sudo chmod +x /etc/init.d/logstash-forwarder
-sudo update-rc.d logstash-forwarder defaults
+sudo cp /vagrant/build/logstash/logstash-forwarder /usr/bin/logstash-forwarder
+sudo cp /vagrant/build/supervisord/supervisord.conf /etc/supervisor/supervisord.conf 
+
 sudo mkdir -p /etc/pki/tls/certs
 sudo cp /vagrant/build/artifacts/logstash-forwarder.crt /etc/pki/tls/certs/
-sudo cp /vagrant/build/logstash/logstash-forwarder /etc/logstash-forwarder
 
-sudo service logstash-forwarder restart
+sudo service supervisor restart
